@@ -56,6 +56,5 @@ describe('recipesList component tests', () => {
     const wrapper = shallow(<Recipe {...props}/>);
     expect(wrapper.find('.food-label')).toHaveLength(4);
   });
-  
 });
 

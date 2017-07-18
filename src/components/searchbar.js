@@ -3,29 +3,38 @@ import React, { Component } from 'react';
 export default class SearchBar extends Component {
 
   render() {
+    const { 
+      textInput, 
+      onTextInputChange, 
+      onSubmitSearchInput, 
+      recipeToShow, 
+      calorieValFun, 
+      calorieInput 
+    } = this.props;
 
-    const { inputValue, textInputFun, onSubmitSearch, showRecipe, calorieChange, calorieValue } = this.props;
     return (
       <div className="searchbar">
-            <input 
+            <input
+            className='searchInput' 
             type='text'
             placeholder='recipe'
-            value={ inputValue }
-            onChange={ evt => textInputFun( evt.target.value )}
+            value={ textInput }
+            onChange={ evt => onTextInputChange( evt.target.value )}
              />
-             <input
+             {/*<input
              type='number'
              placeholder='calorie max'
-            value={ calorieValue }
-            onChange={ evt => calorieChange( evt.target.value )}
-            />
-            <button 
+            value={ calorieInput }
+            onChange={ evt => calorieValFun( evt.target.value )}
+            />*/}
+            <button
+            className='submit-button' 
             onClick={ () => {
-                console.log(calorieValue)
-                    onSubmitSearch(inputValue, calorieValue)
-                    textInputFun('') }
+                    onSubmitSearchInput(textInput, calorieInput)
+                    {/*onTextInputChange('')*/}
+                     }
              } >
-                {`Let's search for ${inputValue}`}
+                {`Let's search`}
             </button>
       </div>
     )

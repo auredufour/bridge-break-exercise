@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { inputChange, fetchRecipes, showOneRecipe, showFirstrecipe, calorieInputChange } from './actions';
+import './App.css';
 
 import RecipeList from './components/recipes-list';
 import SearchBar from './components/searchbar';
 import Recipe from './components/recipe-container';
 
-import './App.css';
+import { 
+    inputChange, 
+    fetchRecipes, 
+    showOneRecipe, 
+    showFirstrecipe, 
+    calorieInputChange, 
+    addFavorites,
+    goToNextPage } from './actions';
 
 class App extends Component {
     constructor(props) {
@@ -15,40 +22,38 @@ class App extends Component {
 }
 
   render() {
-      console.log(this.props)
-    const { textInput, onTextInputChange,calorieValFun, onSubmitSearchInput, showRecipeFun, recipes, recipeToShow, calorieInput } = this.props;
+    const { 
+        showRecipeFun, 
+        recipes
+     } = this.props;
+
     return (
       <div className="App">
-        <SearchBar 
-            inputValue={textInput} 
-            textInputFun={onTextInputChange} 
-            onSubmitSearch={onSubmitSearchInput}
-            showRecipe={showRecipeFun}
-            calorieChange={calorieValFun}
-            calorieValue={calorieInput}
-        />
-        <RecipeList 
-            recipesItems={ recipes }
-            showRecipeItem={ showRecipeFun } 
-        />
-        <Recipe {...this.props}/>
+        <SearchBar {...this.props}/>
+        <div className='recipe-result'>
+            <RecipeList {...this.props}/>
+            <Recipe {...this.props}/>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-    textInput: state.textInput,
-    recipes: state.setRecipes,
-    recipeToShow: state.showRecipe,
-    calorieInput: state.calorieInput
+    textInput:       state.textInput,
+    recipes:         state.setRecipes,
+    recipeToShow:    state.showRecipe,
+    calorieInput:    state.calorieInput,
+    // favoriteRecipes: state.favoriteRecipes
 });
 
 const actions = {
-    onTextInputChange: inputChange,
+    onTextInputChange:   inputChange,
     onSubmitSearchInput: fetchRecipes,
-    showRecipeFun: showOneRecipe,
-    calorieValFun: calorieInputChange,
+    showRecipeFun:       showOneRecipe,
+    calorieValFun:       calorieInputChange,
+    goToNextPage: goToNextPage,
+    // addtoFavorite:       addFavorites,   
 }
 
 export default connect(mapStateToProps, actions)(App) ;

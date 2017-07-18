@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
 
-import { INPUT_CHANGE, SET_RECIPES, SHOW_ONE_RECIPE, SHOW_FIRST_RECIPE, CALORIE_INPUT_CHANGE } from '../actions';
+import { 
+    INPUT_CHANGE, 
+    SET_RECIPES, 
+    SHOW_ONE_RECIPE, 
+    SHOW_FIRST_RECIPE, 
+    CALORIE_INPUT_CHANGE,
+    ADD_FAVORITES } from '../actions';
 
 const textInput = (state = '', action) => {
     if(action.type === INPUT_CHANGE){
@@ -25,18 +31,27 @@ const setRecipes = (state = null, action) => {
 
 const showRecipe = (state = null, action) => {
     if(action.type === SHOW_ONE_RECIPE){
-        return action.payload
+        return action.payload;
     }
     else if(action.type === SHOW_FIRST_RECIPE && action.payload.hits){
-        return action.payload.hits[0]
+        return action.payload.hits[0];
     }
     return state
 };
+
+// const favoriteRecipes = (state = [], action) => {
+//     console.log(state)
+//     if(action.type === ADD_FAVORITES){
+//          return [...favoriteRecipes, action.payload ]
+//     }
+//     return state
+// }
 
 
 export default combineReducers({
   textInput,
   setRecipes,
   showRecipe,
-  calorieInput
+  calorieInput,
+//   favoriteRecipes
 });

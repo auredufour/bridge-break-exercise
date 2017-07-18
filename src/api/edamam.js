@@ -17,4 +17,12 @@ export const fetchRecipes = (ingredient, calories=null) => {
     }
 }
 
+export const goToNextPage = (ingredient, from, to) => {
+        return (
+            fetch(`https://api.edamam.com/search?app_id=${APP_ID}&from=${from}&to=${to}&app_key=${APP_KEY}&q=${ingredient}`)
+            .then(res => res.json())
+        ) 
+    }
+
+
     
